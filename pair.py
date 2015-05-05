@@ -101,6 +101,6 @@ class CodePairs(object):
             message.set_html(self.COPY.format(pair[1], pair[0], troll_copy))
             message.set_text(self.COPY.format(pair[1], pair[0], troll_copy))
             message.set_from(self.sg_from)
-            status, msg = sg.send(message)
+            status, msg = self.sg_client.send(message)
             print(status)
             print(msg)
