@@ -1,4 +1,5 @@
 sg:
   username: myusername
   password: mypassword
+  from: 'My Email <dev@dev.com>'
 
