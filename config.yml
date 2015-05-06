@@ -10,7 +10,7 @@ hobbits:
   - jschweers
 
 enchantresses:
-  - npellegrino
+  # - npellegrino
   - czue
   - droberts
   - dmiller
