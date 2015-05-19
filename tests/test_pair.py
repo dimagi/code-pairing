@@ -14,6 +14,12 @@ def test_uneven_groups():
 
     assert len(pairs) == 3
 
+def test_uneven_groups2():
+    cp = CodePairs(config_path='tests/uneven2.yml')
+    pairs = cp._generate_pairs()
+
+    assert len(pairs) == 2
+    assert any(map(lambda p: len(p) == 3, pairs))
 
 def test_odd_number():
     cp = CodePairs(config_path='tests/odd.yml')
@@ -21,3 +27,4 @@ def test_odd_number():
 
     assert len(pairs) == 3
     assert any(map(lambda p: len(p) == 3, pairs))
+

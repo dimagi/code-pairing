@@ -59,8 +59,8 @@ class CodePairs(object):
         random.shuffle(self.enchantresses)
 
         zipped = list(izip_longest(self.hobbits, self.enchantresses))
-        no_pair = map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not [1], zipped))
-        pairs = filter(lambda p: p[0] and [1], zipped)
+        no_pair = map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped))
+        pairs = filter(lambda p: p[0] and p[1], zipped)
 
         # Handle the odd numbers
         one = two = None
@@ -84,6 +84,7 @@ class CodePairs(object):
 
     def email_pairs(self):
         pairs = self._generate_pairs()
+        print(pairs)
         for pair in pairs:
             message = sendgrid.Mail()
             message.add_to(map(lambda username: "{}@{}.com".format(username, 'dimagi'), pair))
