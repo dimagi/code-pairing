@@ -20,7 +20,9 @@ class CodePairs(object):
     """
 
     TROLL_COPY = """
-    Your journey also includes the rare, but equally awesome, troll: {}
+    Your journey also includes the rare, but equally awesome, troll: <b>{}</b>
+
+    Note: the troll is necessary for when we have an odd number of developers and need to have a group of 3.
     """
 
     def __init__(self, config_path=None, sg_path=None):
