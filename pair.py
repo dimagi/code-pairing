@@ -13,7 +13,7 @@ from datetime import datetime
 class CodePairs(object):
 
     COPY = """
-    Your new code review buddy for the next two weeks has been chosen! Enchantress <b>{}</b> and hobbit <b>{}</b>, go forth and embark on an epic
+    Your new code review buddy for the next two weeks has been chosen! Buddy <b>{}</b> and buddy <b>{}</b>, go forth and embark on an epic
     journey together!
 
     {}
