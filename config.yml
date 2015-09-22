@@ -8,8 +8,6 @@ hobbits:
   - sreddy
   - frener
   - npellegrino
-
-enchantresses:
   - jschweers
   - czue
   - droberts
@@ -18,3 +16,5 @@ enchantresses:
   - esoergel
   - gcapalbo
   - biyeun
+
+enchantresses: []
