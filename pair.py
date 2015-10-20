@@ -57,6 +57,7 @@ class CodePairs(object):
         return self.config['enchantresses']
 
     def _generate_pairs(self):
+        random.shuffle(self.hobbits)
         random.shuffle(self.enchantresses)
 
         zipped = list(izip_longest(self.hobbits, self.enchantresses))
