@@ -87,19 +87,21 @@ class CodePairs(object):
         pairs = self._generate_pairs()
         print(pairs)
         for pair in pairs:
+            is_trio = len(pair) == 3
             message = sendgrid.Mail()
             message.add_to(map(lambda username: "{}@{}.com".format(username, 'dimagi'), pair))
 
-            message.set_subject('Your code review {} for {}!'.format(
-                'duo' if len(pair) == 2 else 'trio',
-                datetime.now(),
-            ))
+            subject = 'Your code review {}: {}'.format(
+                'duo' if not is_trio else 'trio',
+                ', '.join(pair)
+            )
 
-            if len(pair) == 3:
+            if is_trio:
                 troll_copy = self.TROLL_COPY.format(pair[2])
             else:
                 troll_copy = ''
 
+            message.set_subject(subject)
             message.set_html(self.COPY.format(pair[1], pair[0], troll_copy))
             message.set_text(self.COPY.format(pair[1], pair[0], troll_copy))
             message.set_from(self.sg_from)
