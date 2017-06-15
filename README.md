@@ -5,6 +5,12 @@ This script allows you to assign new code pairs by running this command:
 python runner.py
 ```
 
+### Setup on Jenkins
+
+1. The code pairing directory should live in `/var/lib/code-pairing`.
+2. Run `pip install -r requirements.txt`
+3. Copy cron command from the `two_week_cron_job` and place in crontab
+
 ### Getting Started
 You need to ensure that there exists an `sg.yml` file. You can base yours off of the `sg.example.yml` file.
 This will allow the script to access SendGrid and send emails.
