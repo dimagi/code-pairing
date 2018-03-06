@@ -27,5 +27,5 @@ nosetests
 - Feel free to change whether you belong in the `enchantress` or `hobbit` camp. `hobbits` are generally newer
   while `enchantresses` are generally more experienced. Try and keep the two lists roughly equal. The script 
       will handle odd numbers or uneven groups.
-- Once you get your partner, you should ping him/her on each PR you make. There should be low bar to bring in
+- Once you get your partner, you should ping them on each PR you make. There should be low bar to bring in
   someone else who has more context on the PR.
