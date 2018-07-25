@@ -17,6 +17,8 @@ class CodePairs(object):
     journey together!
 
     {}
+    
+    P.S. Remember to schedule some time to catch up with your buddy(s).
     """
 
     TROLL_COPY = """
