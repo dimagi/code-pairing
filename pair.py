@@ -36,11 +36,11 @@ class CodePairs(object):
 
     def load_config(self):
         with open(self.config_path, 'r') as f:
-            return yaml.load(f.read())
+            return yaml.safe_load(f.read())
 
     def load_sg(self):
         with open(self.sg_path, 'r') as f:
-            return yaml.load(f.read())
+            return yaml.safe_load(f.read())
 
     @property
     def sg_client(self):
