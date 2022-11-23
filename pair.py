@@ -63,8 +63,8 @@ class CodePairs(object):
         random.shuffle(self.enchantresses)
 
         zipped = list(zip_longest(self.hobbits, self.enchantresses))
-        no_pair = map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped))
-        pairs = filter(lambda p: p[0] and p[1], zipped)
+        no_pair = list(map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
+        pairs = list(filter(lambda p: p[0] and p[1], zipped))
 
         # Handle the odd numbers
         one = two = None
