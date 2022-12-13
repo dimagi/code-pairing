@@ -2,28 +2,13 @@
 
 import os
 import random
-import sendgrid
 import yaml
 from itertools import zip_longest
-from datetime import datetime
+
+from email_utils import build_email_from_usernames, get_email_client
 
 
 class CodePairs(object):
-
-    COPY = """
-    Your new code review buddy for the next two weeks has been chosen! Buddy <b>{}</b> and buddy <b>{}</b>, go forth and embark on an epic
-    journey together!
-
-    {}
-    
-    P.S. Remember to schedule some time to catch up with your buddy(s).
-    """
-
-    TROLL_COPY = """
-    Your journey also includes the rare, but equally awesome, troll: <b>{}</b>
-
-    Note: the troll is necessary for when we have an odd number of developers and need to have a group of 3.
-    """
 
     def __init__(self, config_path=None, sg_path=None):
         self.config_path = config_path or os.path.join(os.path.dirname(__file__), 'config.yml')
@@ -41,11 +26,12 @@ class CodePairs(object):
             return yaml.safe_load(f.read())
 
     @property
-    def sg_client(self):
-        return sendgrid.SendGridClient(self.sg_config['sg']['username'], self.sg_config['sg']['password'])
+    def email_client(self):
+        return get_email_client(self.sg_config['sg']['username'],
+                                self.sg_config['sg']['password'])
 
     @property
-    def sg_from(self):
+    def email_sender(self):
         return self.sg_config['sg']['from']
 
     @property
@@ -87,25 +73,8 @@ class CodePairs(object):
     def email_pairs(self):
         pairs = self._generate_pairs()
         print(pairs)
-        for pair in pairs:
-            is_trio = len(pair) == 3
-            message = sendgrid.Mail()
-            message.add_to(map(lambda username: "{}@{}.com".format(username, 'dimagi'), pair))
-
-            subject = 'Your code review {}: {}'.format(
-                'duo' if not is_trio else 'trio',
-                ', '.join(pair)
-            )
-
-            if is_trio:
-                troll_copy = self.TROLL_COPY.format(pair[2])
-            else:
-                troll_copy = ''
-
-            message.set_subject(subject)
-            message.set_html(self.COPY.format(pair[1], pair[0], troll_copy))
-            message.set_text(self.COPY.format(pair[1], pair[0], troll_copy))
-            message.set_from(self.sg_from)
-            status, msg = self.sg_client.send(message)
+        for usernames in pairs:
+            message = build_email_from_usernames(self.email_sender, usernames)
+            status, msg = self.email_client.send(message)
             print(status)
             print(msg)
