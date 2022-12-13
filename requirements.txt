@@ -1,2 +1,2 @@
-sendgrid
-pyyaml
+sendgrid==6.9.7
+pyyaml==6.0
