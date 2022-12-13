@@ -3,8 +3,8 @@ import sendgrid
 import constants
 
 
-def get_email_client(username, password):
-    return sendgrid.SendGridClient(username, password)
+def get_email_client(api_key):
+    return sendgrid.SendGridAPIClient(api_key=api_key)
 
 
 def build_email_from_usernames(sender, usernames):
@@ -16,11 +16,10 @@ def build_email_from_usernames(sender, usernames):
 
 def _build_email(sender, recipients, subject, content):
     message = sendgrid.Mail()
-    message.set_from(sender)
-    message.add_to(recipients)
-    message.set_subject(subject)
-    message.set_html(content)
-    message.set_text(content)
+    message.from_email = sender
+    message.to = recipients
+    message.subject = subject
+    message.add_content(content)
 
 
 def _get_recipients_from_usernames(usernames):

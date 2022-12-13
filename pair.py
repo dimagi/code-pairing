@@ -27,8 +27,7 @@ class CodePairs(object):
 
     @property
     def email_client(self):
-        return get_email_client(self.sg_config['sg']['username'],
-                                self.sg_config['sg']['password'])
+        return get_email_client(self.sg_config['sg']['api_key'])
 
     @property
     def email_sender(self):
