@@ -1,12 +1,10 @@
 # coding: utf-8
 
-from __future__ import unicode_literals, print_function
-
 import os
 import random
 import sendgrid
 import yaml
-from itertools import izip_longest
+from itertools import zip_longest
 from datetime import datetime
 
 
@@ -36,11 +34,11 @@ class CodePairs(object):
 
     def load_config(self):
         with open(self.config_path, 'r') as f:
-            return yaml.load(f.read())
+            return yaml.safe_load(f.read())
 
     def load_sg(self):
         with open(self.sg_path, 'r') as f:
-            return yaml.load(f.read())
+            return yaml.safe_load(f.read())
 
     @property
     def sg_client(self):
@@ -62,9 +60,9 @@ class CodePairs(object):
         random.shuffle(self.hobbits)
         random.shuffle(self.enchantresses)
 
-        zipped = list(izip_longest(self.hobbits, self.enchantresses))
-        no_pair = map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped))
-        pairs = filter(lambda p: p[0] and p[1], zipped)
+        zipped = list(zip_longest(self.hobbits, self.enchantresses))
+        no_pair = list(map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
+        pairs = list(filter(lambda p: p[0] and p[1], zipped))
 
         # Handle the odd numbers
         one = two = None

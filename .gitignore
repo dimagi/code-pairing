@@ -1,3 +1,5 @@
 sg.yml
 *.pyc
 pairs.log
+.idea
+.python-version
