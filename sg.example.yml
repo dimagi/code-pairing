@@ -1,5 +1,4 @@
 sg:
-  username: myusername
-  password: mypassword
+  api_key: myusername
   from: 'My Email <dev@dev.com>'
 
