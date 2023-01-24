@@ -20,6 +20,7 @@ def _build_email(sender, recipients, subject, content):
     message.to = recipients
     message.subject = subject
     message.add_content(content)
+    return message
 
 
 def _get_recipients_from_usernames(usernames):
