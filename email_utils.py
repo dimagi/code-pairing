@@ -19,7 +19,7 @@ def _build_email(sender, recipients, subject, content):
     message.from_email = sender
     message.to = recipients
     message.subject = subject
-    message.add_content(content)
+    message.add_content(content, 'text/html')
     return message
 
 
