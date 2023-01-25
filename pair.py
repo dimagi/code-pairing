@@ -2,8 +2,10 @@
 
 import os
 import random
-import yaml
 from itertools import zip_longest
+
+import yaml
+from python_http_client import HTTPError
 
 from email_utils import build_email_from_usernames, get_email_client
 
@@ -71,9 +73,10 @@ class CodePairs(object):
 
     def email_pairs(self):
         pairs = self._generate_pairs()
-        print(pairs)
         for usernames in pairs:
             message = build_email_from_usernames(self.email_sender, usernames)
-            status, msg = self.email_client.send(message)
-            print(status)
-            print(msg)
+            try:
+                response = self.email_client.send(message)
+            except HTTPError as e:
+                print(e)
+            print(f"Request received with response: {response.status_code}\n{response.body}")
