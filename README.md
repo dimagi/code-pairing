@@ -11,9 +11,10 @@ python runner.py
 2. Run `pip install -r requirements.txt`
 3. Copy cron command from the `two_week_cron_job` and place in crontab
 
-### Getting Started
-You need to ensure that there exists an `sg.yml` file. You can base yours off of the `sg.example.yml` file.
-This will allow the script to access SendGrid and send emails.
+### Configuration Setup
+The application needs the following environment variables set to work properly:
+- SENDGRID_API_KEY (Valid API key to make requests via SendGrid)
+- FROM_EMAIL (Email address to send emails from)
 
 ### Tests
 Run:
