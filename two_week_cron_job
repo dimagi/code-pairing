@@ -1,1 +1,0 @@
-0 14 * * Tue expr `date +\%s` / 604800 \% 2 == 0 >/dev/null || cd /var/lib/code-pairing/ && /bin/bash /var/lib/code-pairing/run.sh &>> /var/lib/code-pairing/pairs.log

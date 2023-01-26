@@ -5,15 +5,15 @@ This script allows you to assign new code pairs by running this command:
 python runner.py
 ```
 
-### Setup on Jenkins
+### Setup on Heroku
 
-1. The code pairing directory should live in `/var/lib/code-pairing`.
-2. Run `pip install -r requirements.txt`
-3. Copy cron command from the `two_week_cron_job` and place in crontab
+1. The code pairing directory should live in `/app/`.
+2. Setup Heroku Scheduler to run `python runner.py` on a scheduled interval.
 
-### Getting Started
-You need to ensure that there exists an `sg.yml` file. You can base yours off of the `sg.example.yml` file.
-This will allow the script to access SendGrid and send emails.
+### Configuration Setup
+The application needs the following environment variables set to work properly:
+- SENDGRID_API_KEY (Valid API key to make requests via SendGrid)
+- FROM_EMAIL (Email address to send emails from)
 
 ### Tests
 Run:

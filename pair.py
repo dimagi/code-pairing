@@ -12,28 +12,21 @@ from email_utils import build_email_from_usernames, get_email_client
 
 class CodePairs(object):
 
-    def __init__(self, config_path=None, sg_path=None):
+    def __init__(self, config_path=None):
         self.config_path = config_path or os.path.join(os.path.dirname(__file__), 'config.yml')
-        self.sg_path = sg_path or os.path.join(os.path.dirname(__file__), 'sg.yml')
-
         self.config = self.load_config()
-        self.sg_config = self.load_sg()
 
     def load_config(self):
         with open(self.config_path, 'r') as f:
             return yaml.safe_load(f.read())
 
-    def load_sg(self):
-        with open(self.sg_path, 'r') as f:
-            return yaml.safe_load(f.read())
-
     @property
     def email_client(self):
-        return get_email_client(self.sg_config['sg']['api_key'])
+        return get_email_client(os.environ['SENDGRID_API_KEY'])
 
     @property
     def email_sender(self):
-        return self.sg_config['sg']['from']
+        return os.environ['FROM_EMAIL']
 
     @property
     def hobbits(self):
