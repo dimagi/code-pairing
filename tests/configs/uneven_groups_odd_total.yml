@@ -1,9 +1,14 @@
 ---
 hobbits:
-  - brudolph
-  - tsheffels
-  - jemord
+  - username: stan
+    preference: sync
+  - username: cameron
+    preference: async
+  - username: jannik
+    preference: sync
 
 enchantresses:
-  - jschweers
-  - czue
+  - username: stefanos
+    preference: sync
+  - username: diego
+    preference: async

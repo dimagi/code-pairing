@@ -1,8 +1,12 @@
 ---
 hobbits:
-  - brudolph
-  - tsheffels
+  - username: roger
+    preference: sync
+  - username: rafa
+    preference: async
 
 enchantresses:
-  - npellegrino
-  - czue
+  - username: novak
+    preference: sync
+  - username: andy
+    preference: async

@@ -1,10 +1,16 @@
 ---
 hobbits:
-  - brudolph
-  - tsheffels
+  - username: holger
+    preference: sync
+  - username: casper ruud
+    preference: async
 
 enchantresses:
-  - npellegrino
-  - czue
-  - joe
-  - csims
+  - username: andrey
+    preference: sync
+  - username: hubert
+    preference: async
+  - username: frances
+    preference: sync
+  - username: daniil
+    preference: async
