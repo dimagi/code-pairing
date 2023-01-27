@@ -1,10 +1,7 @@
 name: "Generate code pairs"
 on:
-  pull_request:
-    branches:
-      - master # for testing
-#  schedule:
-#  - cron: "0 14 * * Tue expr `date +\%s` / 604800 \% 2"
+  schedule:
+  - cron: "0 14 * * Tue expr `date +\%s` / 604800 \% 2"
 
 jobs:
   generate:
