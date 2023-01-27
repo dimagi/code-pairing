@@ -10,5 +10,8 @@ jobs:
       SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
       FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
     steps:
-      - name: Run python script
+      - uses: actions/checkout@v3
+      - name: install requirements
+        run: pip install -r requirements.txt
+      - name: run python script
         run: python runner.py
