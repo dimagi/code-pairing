@@ -5,11 +5,6 @@ This script allows you to assign new code pairs by running this command:
 python runner.py
 ```
 
-### Setup on Heroku
-
-1. The code pairing directory should live in `/app/`.
-2. Setup Heroku Scheduler to run `python runner.py` on a scheduled interval.
-
 ### Configuration Setup
 The application needs the following environment variables set to work properly:
 - SENDGRID_API_KEY (Valid API key to make requests via SendGrid)
