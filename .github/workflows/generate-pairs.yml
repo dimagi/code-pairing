@@ -1,7 +1,8 @@
 name: "Generate code pairs"
 on:
   schedule:
-  - cron: "0 14 * * Tue expr `date +%s` / 604800 % 2"
+  - cron: "0 14 1-7 * Mon"
+  - cron: "0 14 15-21 * Mon"
 
 jobs:
   generate:
