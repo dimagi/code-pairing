@@ -1,19 +1,14 @@
 ---
 hobbits:
-  - name: Stan
-    email: stan@dimagi.com
+  - username: stan
     preference: sync
-  - name: Cameron
-    email: cameron@dimagi.com
+  - username: cameron
     preference: async
-  - name: Jannik
-    email: jannik@dimagi.com
+  - username: jannik
     preference: sync
 
 enchantresses:
-  - name: Stefanos
-    email: stefanos@dimagi.com
+  - username: stefanos
     preference: sync
-  - name: Diego
-    email: diego@dimagi.com
+  - username: diego
     preference: async

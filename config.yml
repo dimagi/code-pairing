@@ -1,14 +1,15 @@
 ---
 # INSTRUCTIONS
-# 'name' and 'email' are self-explanatory, but preference is used to
-# specify whether you prefer to meet synchronously or asynchronously.
+# 'username' is your dimagi email username
+# 'preference' is whether you prefer to meet synchronously or asynchronously.
 # Use the value 'sync', 'async', or 'none' to specify your preference
 #
 # For now, only add entries to 'hobbits'
 hobbits:
-  - name: Graham
-    email: gherceg@dimagi.com
+  - username: gherceg
     preference: sync
+  - username: gherceg+test
+    preference: async
   # ^^ add your info here ^^
 
 

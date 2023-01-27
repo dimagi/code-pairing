@@ -1,16 +1,12 @@
 ---
 hobbits:
-  - name: Roger
-    email: roger@dimagi.com
+  - username: roger
     preference: sync
-  - name: Rafa
-    email: rafa@dimagi.com
+  - username: rafa
     preference: async
 
 enchantresses:
-  - name: Novak
-    email: novak@dimagi.com
+  - username: novak
     preference: sync
-  - name: Andy
-    email: andy@dimagi.com
+  - username: andy
     preference: async
