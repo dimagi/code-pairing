@@ -1,0 +1,16 @@
+name: code-pairing tests
+on:
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install requirements
+        run: pip install -r requirements.txt
+      - name: run tests
+        run: nosetests
+
