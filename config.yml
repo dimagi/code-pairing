@@ -8,8 +8,6 @@
 hobbits:
   - username: gherceg
     preference: sync
-  - username: gherceg+test
-    preference: async
   # ^^ add your info here ^^
 
 
