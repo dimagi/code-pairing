@@ -12,6 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: install requirements
-        run: pip install -r requirements.txt
+        run: pip install -r requirements/requirements.txt
       - name: run python script
         run: python runner.py

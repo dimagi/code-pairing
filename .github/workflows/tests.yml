@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: install requirements
-        run: pip install -r requirements.txt
+      - name: install test requirements
+        run: pip install -r requirements/test-requirements.txt
       - name: run tests
         run: nosetests
 
