@@ -4,7 +4,7 @@ This script allows you to assign new code pairs by running this command:
 ```
 python runner.py
 ```
-
+test update
 ### Configuration Setup
 The application needs the following environment variables set to work properly:
 - SENDGRID_API_KEY (Valid API key to make requests via SendGrid)
