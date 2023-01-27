@@ -1,9 +1,19 @@
 ---
 hobbits:
-  - brudolph
-  - tsheffels
-  - jemord
+  - name: Stan
+    email: stan@dimagi.com
+    preference: sync
+  - name: Cameron
+    email: cameron@dimagi.com
+    preference: async
+  - name: Jannik
+    email: jannik@dimagi.com
+    preference: sync
 
 enchantresses:
-  - jschweers
-  - czue
+  - name: Stefanos
+    email: stefanos@dimagi.com
+    preference: sync
+  - name: Diego
+    email: diego@dimagi.com
+    preference: async

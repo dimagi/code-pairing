@@ -1,10 +1,22 @@
 ---
 hobbits:
-  - brudolph
-  - tsheffels
+  - name: Holger
+    email: holger@dimagi.com
+    preference: sync
+  - name: Casper Ruud
+    email: casper@dimagi.com
+    preference: async
 
 enchantresses:
-  - npellegrino
-  - czue
-  - joe
-  - csims
+  - name: Andrey
+    email: andrey@dimagi.com
+    preference: sync
+  - name: Hubert
+    email: hubert@dimagi.com
+    preference: async
+  - name: Frances
+    email: frances@dimagi.com
+    preference: sync
+  - name: Daniil
+    email: daniil@dimagi.com
+    preference: async

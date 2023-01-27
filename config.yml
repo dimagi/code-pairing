@@ -1,19 +1,16 @@
 ---
+# INSTRUCTIONS
+# 'name' and 'email' are self-explanatory, but preference is used to
+# specify whether you prefer to meet synchronously or asynchronously.
+# Use the value 'sync', 'async', or 'none' to specify your preference
+#
+# For now, only add entries to 'hobbits'
 hobbits:
-  - nhooper
-  - sreddy
-  - droberts
-  - dmiller
-  - skelly
-  - esoergel
-  - biyeun
-  - cellowitz
-  - mkangia
-  - jschweers
-  - aphulera
-  - sherbers
-  - gherceg
-  
+  - name: Graham
+    email: gherceg@dimagi.com
+    preference: sync
+  # ^^ add your info here ^^
 
 
 enchantresses: []
+# -- do not add here --

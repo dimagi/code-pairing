@@ -1,8 +1,16 @@
 ---
 hobbits:
-  - brudolph
-  - tsheffels
+  - name: Roger
+    email: roger@dimagi.com
+    preference: sync
+  - name: Rafa
+    email: rafa@dimagi.com
+    preference: async
 
 enchantresses:
-  - npellegrino
-  - czue
+  - name: Novak
+    email: novak@dimagi.com
+    preference: sync
+  - name: Andy
+    email: andy@dimagi.com
+    preference: async
