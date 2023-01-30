@@ -1,12 +1,8 @@
 ---
 hobbits:
-  - username: roger
-    preference: sync
-  - username: rafa
-    preference: async
+  - roger
+  - rafa
 
 enchantresses:
-  - username: novak
-    preference: sync
-  - username: andy
-    preference: async
+  - novak
+  - andy

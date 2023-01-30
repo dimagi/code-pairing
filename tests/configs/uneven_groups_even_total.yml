@@ -1,16 +1,10 @@
 ---
 hobbits:
-  - username: holger
-    preference: sync
-  - username: casper ruud
-    preference: async
+  - holger
+  - casper ruud
 
 enchantresses:
-  - username: andrey
-    preference: sync
-  - username: hubert
-    preference: async
-  - username: frances
-    preference: sync
-  - username: daniil
-    preference: async
+  - andrey
+  - hubert
+  - frances
+  - daniil
