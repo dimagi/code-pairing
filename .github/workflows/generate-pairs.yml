@@ -1,8 +1,8 @@
 name: "Generate code pairs"
 on:
   schedule:
-  - cron: "0 14 1-7 * 1"
-  - cron: "0 14 15-21 * 1"
+  - cron: "0 14 1-7 * *"
+  - cron: "0 14 15-21 * *"
 
 jobs:
   generate:
@@ -15,7 +15,12 @@ jobs:
       - uses: actions/setup-python@v3
         with:
           python-version: '3.9'
+      - name: Get current day
+        id: day
+        run: echo "::set-output name=day::$(date +%u)"
       - name: install requirements
+        if: steps.day.outputs.day == 1 # only run on Monday
         run: pip install -r requirements/requirements.txt
       - name: run python script
+        if: steps.day.outputs.day == 1 # only run on Monday
         run: python runner.py
