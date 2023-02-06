@@ -16,11 +16,10 @@ jobs:
         with:
           python-version: '3.9'
       - name: Get current day
-        id: day
-        run: echo "::set-output name=day::$(date +%u)"
+        run: echo "day_of_week=$(date +%u)" >> $GITHUB_ENV
       - name: install requirements
-        if: steps.day.outputs.day == 1 # only run on Monday
+        if: env.day_of_week == 1 # only run on Monday
         run: pip install -r requirements/requirements.txt
       - name: run python script
-        if: steps.day.outputs.day == 1 # only run on Monday
+        if: env.day_of_week == 1 # only run on Monday
         run: python runner.py
