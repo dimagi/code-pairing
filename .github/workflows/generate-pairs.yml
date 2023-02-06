@@ -1,8 +1,8 @@
 name: "Generate code pairs"
 on:
   schedule:
-  - cron: "0 14 1-7 * Mon"
-  - cron: "0 14 15-21 * Mon"
+  - cron: "0 14 1-7 * *"
+  - cron: "0 14 15-21 * *"
 
 jobs:
   generate:
@@ -15,7 +15,11 @@ jobs:
       - uses: actions/setup-python@v3
         with:
           python-version: '3.9'
+      - name: Get current day
+        run: echo "day_of_week=$(date +%u)" >> $GITHUB_ENV
       - name: install requirements
+        if: env.day_of_week == 1 # only run on Monday
         run: pip install -r requirements/requirements.txt
       - name: run python script
+        if: env.day_of_week == 1 # only run on Monday
         run: python runner.py
