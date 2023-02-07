@@ -1,14 +1,10 @@
 ---
 # INSTRUCTIONS
 # 'username' is your dimagi email username
-# 'preference' is whether you prefer to meet synchronously or asynchronously.
-# Use the value 'sync', 'async', or 'none' to specify your preference
 #
 # For now, only add entries to 'hobbits'
 hobbits:
-  - username: gherceg
-    preference: sync
-  # ^^ add your info here ^^
+  - gherceg
 
 
 enchantresses: []

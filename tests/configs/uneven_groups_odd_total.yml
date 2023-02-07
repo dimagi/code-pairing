@@ -1,14 +1,9 @@
 ---
 hobbits:
-  - username: stan
-    preference: sync
-  - username: cameron
-    preference: async
-  - username: jannik
-    preference: sync
+  - stan
+  - cameron
+  - jannik
 
 enchantresses:
-  - username: stefanos
-    preference: sync
-  - username: diego
-    preference: async
+  - stefanos
+  - diego
