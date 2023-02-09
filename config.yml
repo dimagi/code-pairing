@@ -5,6 +5,7 @@
 # For now, only add entries to 'hobbits'
 hobbits:
   - gherceg
+  - millerdev
 
 
 enchantresses: []
