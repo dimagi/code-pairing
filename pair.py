@@ -73,3 +73,44 @@ class CodePairs(object):
             except HTTPError as e:
                 print(e)
             print(f"Request received with response: {response.status_code}\n{response.body}")
+
+
+def generate_pairs(list_one, list_two=None):
+    """
+
+    :param list_one:
+    :param list_two: optional list to allow generating pairs between two
+    different groups
+    :return:
+    """
+    assert list_one, "list_one is empty"
+    list_two = list_two if list_two else []
+    assert len(list_one) + len(list_two) > 1, "Total must be larger than 1 item"
+    
+    random.shuffle(list_one)
+    random.shuffle(list_two)
+
+    zipped = list(zip_longest(list_one, list_two))
+    no_pair = list(
+        map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
+    pairs = list(filter(lambda p: p[0] and p[1], zipped))
+
+    # Handle the odd numbers
+    one = two = None
+    while True:
+        try:
+            one = no_pair.pop()
+        except IndexError:
+            break
+
+        try:
+            two = no_pair.pop()
+        except IndexError:
+            # Take care of the troll
+            group_idx = random.randint(0, len(pairs) - 1)
+            pairs[group_idx] = (pairs[group_idx][0], pairs[group_idx][1], one)
+            break
+        else:
+            pairs.append((one, two))
+
+    return pairs
