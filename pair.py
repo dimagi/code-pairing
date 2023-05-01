@@ -114,3 +114,17 @@ def generate_pairs(list_one, list_two=None):
             pairs.append((one, two))
 
     return pairs
+
+
+def send_email(pairs):
+    sender = os.environ.get('FROM_EMAIL')
+    client = get_email_client(os.environ.get('SENDGRID_API_KEY'))
+
+    for usernames in pairs:
+        message = build_email_from_usernames(sender, usernames)
+        try:
+            response = client.send(message)
+        except HTTPError as e:
+            print(e)
+        print(
+            f"Request received with response: {response.status_code}\n{response.body}")
