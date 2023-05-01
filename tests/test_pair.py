@@ -1,7 +1,7 @@
 import random
 from unittest import TestCase
 
-from pair import generate_pairs
+from pair import ConfigParser, generate_pairs
 
 
 class GeneratePairsTests(TestCase):
@@ -47,3 +47,16 @@ class GeneratePairsTests(TestCase):
     @classmethod
     def setUpClass(cls):
         random.seed(5)  # set to some constant for consistent results
+
+
+class ConfigParserTests(TestCase):
+
+    def test_parses_list_one_with_no_list_two(self):
+        parser = ConfigParser(config_path='tests/configs/list_one.yml')
+        self.assertEqual(parser.list_one, ['roger', 'rafa', 'novak'])
+        self.assertEqual(parser.list_two, [])
+
+    def test_parses_list_one_and_list_two(self):
+        parser = ConfigParser(config_path='tests/configs/both_lists.yml')
+        self.assertEqual(parser.list_one, ['holger', 'casper'])
+        self.assertEqual(parser.list_two, ['andrei', 'hubert'])
