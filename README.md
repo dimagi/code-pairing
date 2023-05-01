@@ -17,10 +17,5 @@ nosetests
 ```
 
 ### Etiquette
-
-- If you are gone for a week or two, please submit a PR to remove yourself from the `config.yml` file.
-- Feel free to change whether you belong in the `enchantress` or `hobbit` camp. `hobbits` are generally newer
-  while `enchantresses` are generally more experienced. Try and keep the two lists roughly equal. The script 
-      will handle odd numbers or uneven groups.
-- Once you get your partner, you should ping them on each PR you make. There should be low bar to bring in
-  someone else who has more context on the PR.
+- If you know you will be offline for an entire 2 week rotation, please submit a
+PR to remove yourself from the `config.yml` file.
