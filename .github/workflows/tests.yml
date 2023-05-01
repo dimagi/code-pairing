@@ -15,5 +15,5 @@ jobs:
       - name: install test requirements
         run: pip install -r requirements/test-requirements.txt
       - name: run tests
-        run: nosetests
+        run: nose2
 

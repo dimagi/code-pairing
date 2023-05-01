@@ -13,7 +13,9 @@ The application needs the following environment variables set to work properly:
 ### Tests
 Run:
 ```
-nosetests
+nose2  # runs all tests
+
+nose2 dot.path.to.test  # runs individual test
 ```
 
 ### Etiquette
