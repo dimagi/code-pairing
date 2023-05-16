@@ -29,7 +29,7 @@ class GeneratePairsTests(TestCase):
             [('stan', 'diego'), ('jannik', 'stefanos', 'cameron')]
         )
 
-    def test_empty_second_list(self):
+    def test_empty_second_group(self):
         pairs = generate_pairs(['taylor', 'jj', 'dennis', 'felix'])
         self.assertEqual(
             pairs,
@@ -51,12 +51,12 @@ class GeneratePairsTests(TestCase):
 
 class ConfigParserTests(TestCase):
 
-    def test_parses_list_one_with_no_list_two(self):
-        parser = ConfigParser(config_path='tests/configs/list_one.yml')
-        self.assertEqual(parser.list_one, ['roger', 'rafa', 'novak'])
-        self.assertEqual(parser.list_two, [])
+    def test_parses_group_one_with_no_group_two(self):
+        parser = ConfigParser(config_path='tests/configs/group_one.yml')
+        self.assertEqual(parser.group_one, ['roger', 'rafa', 'novak'])
+        self.assertEqual(parser.group_two, [])
 
-    def test_parses_list_one_and_list_two(self):
-        parser = ConfigParser(config_path='tests/configs/both_lists.yml')
-        self.assertEqual(parser.list_one, ['holger', 'casper'])
-        self.assertEqual(parser.list_two, ['andrei', 'hubert'])
+    def test_parses_group_one_and_group_two(self):
+        parser = ConfigParser(config_path='tests/configs/both_groups.yml')
+        self.assertEqual(parser.group_one, ['holger', 'casper'])
+        self.assertEqual(parser.group_two, ['andrei', 'hubert'])

@@ -1,7 +1,7 @@
 ---
 # INSTRUCTIONS
 # 'username' is your dimagi email username
-list_one:
+group_one:
   - gherceg
   - dmiller
   - jtang

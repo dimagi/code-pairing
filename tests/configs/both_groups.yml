@@ -1,8 +1,8 @@
 ---
-list_one:
+group_one:
   - holger
   - casper
 
-list_two:
+group_two:
   - andrei
   - hubert

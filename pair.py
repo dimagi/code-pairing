@@ -21,30 +21,29 @@ class ConfigParser(object):
             return yaml.safe_load(f.read())
 
     @property
-    def list_one(self):
-        return self.config['list_one'] if 'list_one' in self.config else []
+    def group_one(self):
+        return self.config['group_one'] if 'group_one' in self.config else []
 
     @property
-    def list_two(self):
-        return self.config['list_two'] if 'list_two' in self.config else []
+    def group_two(self):
+        return self.config['group_two'] if 'group_two' in self.config else []
 
 
-def generate_pairs(list_one, list_two=None):
+def generate_pairs(group_one, group_two=None):
     """
 
-    :param list_one:
-    :param list_two: optional list to allow generating pairs between two
-    different groups
+    :param group_one:
+    :param group_two: optional to enable generating pairs across groups
     :return:
     """
-    assert list_one, "list_one is empty"
-    list_two = list_two if list_two else []
-    assert len(list_one) + len(list_two) > 1, "Total must be larger than 1 item"
+    assert group_one, "group_one is empty"
+    group_two = group_two if group_two else []
+    assert len(group_one) + len(group_two) > 1, "Total must be larger than 1 item"
     
-    random.shuffle(list_one)
-    random.shuffle(list_two)
+    random.shuffle(group_one)
+    random.shuffle(group_two)
 
-    zipped = list(zip_longest(list_one, list_two))
+    zipped = list(zip_longest(group_one, group_two))
     no_pair = list(
         map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
     pairs = list(filter(lambda p: p[0] and p[1], zipped))
