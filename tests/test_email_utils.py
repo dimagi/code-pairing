@@ -1,6 +1,7 @@
 from unittest import TestCase
 
-from email_utils import build_email_from_usernames
+from email_utils import (_get_recipients_from_usernames,
+                         build_email_from_usernames)
 
 
 class SendgridTests(TestCase):
@@ -21,3 +22,9 @@ class SendgridTests(TestCase):
         msg_json = message.get()
         recipients = [p['email'] for p in msg_json['personalizations'][0]['to']]
         self.assertEqual(recipients, ['user@dimagi.com', 'user2@dimagi.com'])
+
+    # test _get_recipients_from_username
+    
+    def test_email_with_period(self):
+        emails = _get_recipients_from_usernames(['user.test'])
+        self.assertEqual(emails, ['user.test@dimagi.com'])
