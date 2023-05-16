@@ -31,8 +31,7 @@ class ConfigParser(object):
 
 def generate_pairs(group_one, group_two=None):
     """
-
-    :param group_one:
+    :param group_one: required list of items to generate pairs with
     :param group_two: optional to enable generating pairs across groups
     :return:
     """
@@ -44,27 +43,19 @@ def generate_pairs(group_one, group_two=None):
     random.shuffle(group_two)
 
     zipped = list(zip_longest(group_one, group_two))
-    no_pair = list(
-        map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
+    # extract values from incomplete pairs (<value>, None) or (None, <value>)
+    no_pair = list(map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
     pairs = list(filter(lambda p: p[0] and p[1], zipped))
 
-    # Handle the odd numbers
-    one = two = None
-    while True:
-        try:
-            one = no_pair.pop()
-        except IndexError:
-            break
-
-        try:
-            two = no_pair.pop()
-        except IndexError:
-            # Take care of the troll
-            group_idx = random.randint(0, len(pairs) - 1)
-            pairs[group_idx] = (pairs[group_idx][0], pairs[group_idx][1], one)
-            break
+    # Handle the values missing pairs (called a "troll")
+    while no_pair:
+        troll = no_pair.pop()
+        if no_pair:
+            another_troll = no_pair.pop()
+            pairs.append((troll, another_troll))
         else:
-            pairs.append((one, two))
+            random_pair_index = random.randint(0, len(pairs) - 1)
+            pairs[random_pair_index] = pairs[random_pair_index] + (troll, )
 
     return pairs
 
