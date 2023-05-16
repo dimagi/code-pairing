@@ -89,8 +89,6 @@ def send_email(pairs):
     for usernames in pairs:
         message = build_email_from_usernames(sender, usernames)
         try:
-            response = client.send(message)
+            client.send(message)
         except HTTPError as e:
-            print(e)
-        print(
-            f"Request received with response: {response.status_code}\n{response.body}")
+            print(f"Error with request: {e}")
