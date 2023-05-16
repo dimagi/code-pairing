@@ -11,6 +11,28 @@ from email_utils import build_email_from_usernames, get_email_client
 
 
 class ConfigParser(object):
+    """
+    Expects an input yaml file as follows:
+    At a minimum, a value of ``group_one`` must be defined
+
+    group_one:
+      - first
+      - second
+      - ...
+
+    Optionally, you can include a second group to create pairs between group_one
+    and group_two, defined as the value ``group_two``:
+
+    group_one:
+      - first
+      - second
+      - ...
+
+    group_two:
+      - third
+      - fourth
+      - ...
+    """
 
     def __init__(self, config_path=None):
         self.config_path = config_path or os.path.join(os.path.dirname(__file__), 'config.yml')
