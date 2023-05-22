@@ -1,9 +1,7 @@
 ---
 # INSTRUCTIONS
 # 'username' is your dimagi email username
-#
-# For now, only add entries to 'hobbits'
-hobbits:
+group_one:
   - gherceg
   - dmiller
   - jtang
@@ -14,6 +12,3 @@ hobbits:
   - esoergel
   - csmit
   - chris.smit
-
-enchantresses: []
-# -- do not add here --

@@ -10,7 +10,29 @@ from python_http_client import HTTPError
 from email_utils import build_email_from_usernames, get_email_client
 
 
-class CodePairs(object):
+class ConfigParser(object):
+    """
+    Expects an input yaml file as follows:
+    At a minimum, a value of ``group_one`` must be defined
+
+    group_one:
+      - first
+      - second
+      - ...
+
+    Optionally, you can include a second group to create pairs between group_one
+    and group_two, defined as the value ``group_two``:
+
+    group_one:
+      - first
+      - second
+      - ...
+
+    group_two:
+      - third
+      - fourth
+      - ...
+    """
 
     def __init__(self, config_path=None):
         self.config_path = config_path or os.path.join(os.path.dirname(__file__), 'config.yml')
@@ -21,55 +43,52 @@ class CodePairs(object):
             return yaml.safe_load(f.read())
 
     @property
-    def email_client(self):
-        return get_email_client(os.environ['SENDGRID_API_KEY'])
+    def group_one(self):
+        return self.config['group_one'] if 'group_one' in self.config else []
 
     @property
-    def email_sender(self):
-        return os.environ['FROM_EMAIL']
+    def group_two(self):
+        return self.config['group_two'] if 'group_two' in self.config else []
 
-    @property
-    def hobbits(self):
-        return self.config['hobbits']
 
-    @property
-    def enchantresses(self):
-        return self.config['enchantresses']
+def generate_pairs(group_one, group_two=None):
+    """
+    :param group_one: required list of items to generate pairs with
+    :param group_two: optional to enable generating pairs across groups
+    :return:
+    """
+    assert group_one, "group_one is empty"
+    group_two = group_two if group_two else []
+    assert len(group_one) + len(group_two) > 1, "Total must be larger than 1 item"
+    
+    random.shuffle(group_one)
+    random.shuffle(group_two)
 
-    def _generate_pairs(self):
-        random.shuffle(self.hobbits)
-        random.shuffle(self.enchantresses)
+    zipped = list(zip_longest(group_one, group_two))
+    # extract values from incomplete pairs (<value>, None) or (None, <value>)
+    no_pair = list(map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
+    pairs = list(filter(lambda p: p[0] and p[1], zipped))
 
-        zipped = list(zip_longest(self.hobbits, self.enchantresses))
-        no_pair = list(map(lambda p: p[0] or p[1], filter(lambda p: not p[0] or not p[1], zipped)))
-        pairs = list(filter(lambda p: p[0] and p[1], zipped))
+    # Handle the values missing pairs (called a "troll")
+    while no_pair:
+        troll = no_pair.pop()
+        if no_pair:
+            another_troll = no_pair.pop()
+            pairs.append((troll, another_troll))
+        else:
+            random_pair_index = random.randint(0, len(pairs) - 1)
+            pairs[random_pair_index] = pairs[random_pair_index] + (troll, )
 
-        # Handle the odd numbers
-        one = two = None
-        while True:
-            try:
-                one = no_pair.pop()
-            except IndexError:
-                break
+    return pairs
 
-            try:
-                two = no_pair.pop()
-            except IndexError:
-                # Take care of the troll
-                group_idx = random.randint(0, len(pairs) - 1)
-                pairs[group_idx] = (pairs[group_idx][0], pairs[group_idx][1], one)
-                break
-            else:
-                pairs.append((one, two))
 
-        return pairs
+def send_email(pairs):
+    sender = os.environ.get('FROM_EMAIL')
+    client = get_email_client(os.environ.get('SENDGRID_API_KEY'))
 
-    def email_pairs(self):
-        pairs = self._generate_pairs()
-        for usernames in pairs:
-            message = build_email_from_usernames(self.email_sender, usernames)
-            try:
-                response = self.email_client.send(message)
-            except HTTPError as e:
-                print(e)
-            print(f"Request received with response: {response.status_code}\n{response.body}")
+    for usernames in pairs:
+        message = build_email_from_usernames(sender, usernames)
+        try:
+            client.send(message)
+        except HTTPError as e:
+            print(f"Error with request: {e}")
