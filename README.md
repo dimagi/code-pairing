@@ -19,5 +19,4 @@ nose2 dot.path.to.test  # runs individual test
 ```
 
 ### Etiquette
-- If you know you will be offline for an entire 2 week rotation, please submit a
-PR to remove yourself from the `config.yml` file.
+- If you know you will be offline for an entire 2 week rotation, please remove yourself from the `config.yml` file.
