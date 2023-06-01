@@ -16,7 +16,7 @@ jobs:
           python-version: '3.9'
       - name: Read state.txt file
         id: read-state
-        run: echo "{did_run}={$(cat .github/state.txt)}" >> $GITHUB_OUTPUT
+        run: echo "did_run=$(cat .github/state.txt)" >> $GITHUB_OUTPUT
       - name: Generate code pairs
         if: ${{ steps.read-state.outputs.did_run }} == "no"
         run: echo "Running generate code pairs"
