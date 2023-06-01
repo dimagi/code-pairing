@@ -28,4 +28,4 @@ jobs:
         run: echo "yes" > .github/state.txt
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit-message: updated state.txt via github action
+          commit_message: updated state.txt via github action
