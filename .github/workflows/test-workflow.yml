@@ -7,11 +7,14 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+      - run: git checkout master
       - name: Read state.txt file
         id: read-state
         run: echo "{did_run}={$(cat .github/state.txt)}" >> $GITHUB_OUTPUT
@@ -20,7 +23,8 @@ jobs:
         run: echo "Running generate code pairs"
       - name: Update state.txt to no
         if: ${{ steps.read-state.outputs.did_run }} == "no"
-        run: echo "no" > .github/state.txt; git add .github/state.txt; git commit -m "update state.txt to no"; git push origin master;
+        run: echo "no" > .github/state.txt
       - name: Update state.txt to yes
         if: ${{ steps.read-state.outputs.did_run }} == "no"
-        run: echo "yes" > .github/state.txt; git add .github/state.txt; git commit -m "update state.txt to yes"; git push origin master;
+        run: echo "yes" > .github/state.txt
+      - uses: stefanzweifel/git-auto-commit-action@v4
