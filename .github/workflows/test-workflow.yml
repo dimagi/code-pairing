@@ -16,5 +16,5 @@ jobs:
         id: getdidrun
         run: echo "{name}={value}" >> $GITHUB_OUTPUT
       - name: Run
-        if: $GITHUB_OUTPUT == "did_run"
+        if: {{ $GITHUB_OUTPUT }} == "did_run"
         run: echo "Success"
