@@ -1,5 +1,10 @@
 ---
 # INSTRUCTIONS
+#
+# ATTENTION: if you wish to opt into code review pairing, please join the slack
+# channel #gtd-code-review-pairing instead.
+# See https://confluence.dimagi.com/display/GTD/Pair+Code+Review for more details.
+#
 # 'username' is your dimagi email username
 group_one:
   - gherceg
