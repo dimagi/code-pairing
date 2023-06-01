@@ -14,7 +14,7 @@ jobs:
           python-version: '3.9'
       - name: Read state.txt file
         id: getdidrun
-        run: echo "{name}={value}" >> $GITHUB_OUTPUT
+        run: echo "{did_run}={$(cat .github/state.txt)}" >> $GITHUB_OUTPUT
       - name: Run
-        if: {{ $GITHUB_OUTPUT }} == "did_run"
+        if: ${{ steps.getversion.outputs.did_run }} == "did_run"
         run: echo "Success"
