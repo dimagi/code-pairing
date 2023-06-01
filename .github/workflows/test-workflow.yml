@@ -14,7 +14,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - run: git checkout master
       - name: Read state.txt file
         id: read-state
         run: echo "{did_run}={$(cat .github/state.txt)}" >> $GITHUB_OUTPUT
@@ -22,9 +21,11 @@ jobs:
         if: ${{ steps.read-state.outputs.did_run }} == "no"
         run: echo "Running generate code pairs"
       - name: Update state.txt to no
-        if: ${{ steps.read-state.outputs.did_run }} == "no"
+        if: ${{ steps.read-state.outputs.did_run }} == "yes"
         run: echo "no" > .github/state.txt
       - name: Update state.txt to yes
         if: ${{ steps.read-state.outputs.did_run }} == "no"
         run: echo "yes" > .github/state.txt
       - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit-message: updated state.txt via github action
