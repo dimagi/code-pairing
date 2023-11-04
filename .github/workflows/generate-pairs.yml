@@ -40,8 +40,10 @@ jobs:
               should_run="yes"
             else
               should_run="no"
+            fi
           else
             should_run="yes"
+          fi
           echo "$should_run" >> $GITHUB_ENV
       - name: Execute python script
         if: env.should_run == 'yes'
