@@ -14,11 +14,35 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: Get current day
-        run: echo "day_of_week=$(date +%u)" >> $GITHUB_ENV
-      - name: install requirements
-        if: env.day_of_week == 1 # only run on Monday
-        run: pip install -r requirements/requirements.txt
-      - name: run python script
-        if: env.day_of_week == 1 # only run on Monday
-        run: python runner.py
+      - uses: actions/download-artifact@v3
+        with:
+          name: last-run
+          path: last_run.txt
+      - name: Check time since last run
+        id: check_time
+      - shell: bash
+        run: |
+          if [ -f last_run.txt ]; then
+            fourteen_days_ago_secs=$(date --date "14 days ago" +'%s')
+            last_run_secs=`cat last_run.txt`
+            # if the last run was greater than or equal to 14 days ago, run
+            if ["$last_run_secs" -gte "$fourteen_days_ago_secs"]; then
+              should_run="yes"
+            else
+              should_run="no"
+          else
+            should_run="yes"
+          echo "$should_run" >> $GITHUB_ENV
+      - name: Execute python script
+        if: env.should_run == "yes"
+        shell: bash
+        run: |
+          pip install -r requirements/requirements.txt
+          python runner.py
+          date +'%s' > last_run.txt
+      - name: Upload last_run.txt if ran
+        if: env.should_run == "yes"
+        uses: actions/upload-artifact@v3
+        with:
+          name: last-run
+          path: last_run.txt
