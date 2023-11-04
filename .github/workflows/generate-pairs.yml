@@ -36,14 +36,14 @@ jobs:
             should_run="yes"
           echo "$should_run" >> $GITHUB_ENV
       - name: Execute python script
-        if: env.should_run == "yes"
+        if: env.should_run == 'yes'
         shell: bash
         run: |
           pip install -r requirements/requirements.txt
           python runner.py
           date +'%s' > last_run_test.txt
       - name: Upload last_run_test.txt if ran
-        if: env.should_run == "yes"
+        if: env.should_run == 'yes'
         uses: actions/upload-artifact@v3
         with:
           name: last-run-test
