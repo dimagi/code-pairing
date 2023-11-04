@@ -22,8 +22,7 @@ jobs:
           name: last-run-test
           path: last_run_test.txt
       - name: Check time since last run
-        id: check_time
-      - shell: bash
+        shell: bash
         run: |
           if [ -f last_run_test.txt ]; then
             fourteen_days_ago_secs=$(date --date "14 days ago" +'%s')
