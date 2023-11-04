@@ -1,0 +1,25 @@
+name: "Generate code pairs"
+on:
+  schedule:
+  - cron: "0 14 1-7 * *"
+  - cron: "0 14 15-21 * *"
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+      FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Get current day
+        run: echo "day_of_week=$(date +%u)" >> $GITHUB_ENV
+      - name: install requirements
+        if: env.day_of_week == 1 # only run on Monday
+        run: pip install -r requirements/requirements.txt
+      - name: run python script
+        if: env.day_of_week == 1 # only run on Monday
+        run: python runner.py
