@@ -1,8 +1,7 @@
 name: "Generate code pairs"
 on:
   schedule:
-  - cron: "0 14 1-7 * *"
-  - cron: "0 14 15-21 * *"
+  - cron: "0 13 * * 1"  # run every Monday at 13:00 UTC
 
 jobs:
   generate:
