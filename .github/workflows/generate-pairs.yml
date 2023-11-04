@@ -1,0 +1,52 @@
+name: "Generate code pairs"
+on:
+  schedule:
+  - cron: "0 13 * * 1"  # run every Monday at 13:00 UTC
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+      FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - uses: actions/download-artifact@v3
+        with:
+          name: last-run-test
+          path: last_run_test.txt
+      - name: Check time since last run
+        shell: bash
+        run: |
+          if [ -f last_run_test.txt ]; then
+            fourteen_days_ago_secs=$(date --date "14 days ago" +'%s')
+            last_run_secs=`cat last_run_test.txt`
+            # if the last run was greater than or equal to 14 days ago, run
+            if ["$last_run_secs" -gte "$fourteen_days_ago_secs"]; then
+              should_run="yes"
+            else
+              should_run="no"
+            fi
+          else
+            should_run="yes"
+          fi
+          echo "$should_run" >> $GITHUB_ENV
+      - name: Execute python script
+        if: env.should_run == 'yes'
+        shell: bash
+        run: |
+          pip install -r requirements/requirements.txt
+          python runner.py
+          date +'%s' > last_run_test.txt
+      - name: Upload last_run_test.txt if ran
+        if: env.should_run == 'yes'
+        uses: actions/upload-artifact@v3
+        with:
+          name: last-run-test
+          path: last_run_test.txt

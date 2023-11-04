@@ -8,8 +8,9 @@
 # 'username' is your dimagi email username
 group_one:
   - gherceg
-  - dmiller
-  - jtang
-  - aphulera
-  - rcostello
-  - sherbers
+  - gherceg+test
+  # - dmiller
+  # - jtang
+  # - aphulera
+  # - rcostello
+  # - sherbers
